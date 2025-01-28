@@ -6,8 +6,9 @@ import java.util.List;
 
 public interface VehicleService {
 
-    static Vehicle createVehicle(Vehicle vehicle);
+    Vehicle createVehicle(Vehicle vehicle);
     Vehicle updateVehicle(Long id, Vehicle vehicle);
     List<Vehicle> getAllVehicles();
-    Vehicle getVehicleByPlateNumber(String status);
+    Vehicle getVehicleByPlateNumber(String plateNumber);
+    void deleteVehicle(Long id);
 }
