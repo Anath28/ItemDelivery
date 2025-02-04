@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/vehicle")
 
-public class VehicleContoller {
+public class VehicleController {
 
     private final ItemService itemService;
     private final VehicleService vehicleService;
 
-    public VehicleContoller(ItemService itemService, VehicleService vehicleService){
+    public VehicleController(ItemService itemService, VehicleService vehicleService){
         this.itemService = itemService;
         this.vehicleService = vehicleService;
     }
