@@ -1,13 +1,13 @@
 package com.Anath.ItemDelivery.controller;
 
-import ch.qos.logback.core.model.Model;
+import org.springframework.ui.Model;
 import com.Anath.ItemDelivery.Vehicle;
 import com.Anath.ItemDelivery.services.ItemService;
 import com.Anath.ItemDelivery.services.VehicleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import static sun.security.x509.OIDMap.addAttribute;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class DeliveryController {
@@ -29,9 +29,17 @@ public class DeliveryController {
         return "about";
     }
     @GetMapping("/create-vehicle")
-    public String createVehicle(Model model) {
+    public String createVehicle(Model model){
         Vehicle vehicle = new Vehicle();
-        model.addAttribute(attributeName:"vehicle", vehicle)
-        .addAttribute(attributeName:)
+        model.addAttribute("vehicle", vehicle)
+                .addAttribute("allVehicles", vehicleService.getAllVehicles());
+        return "feature";
+    }
+    @PostMapping("/post-vehicle")
+    public String postVehicle(Model model, @ModelAttribute("vehicle") Vehicle vehicle){
+        String message = "vehicle created successful";
+        vehicleService.createVehicle(vehicle);
+        model.addAttribute("message", message);
+        return "feature";
     }
 }

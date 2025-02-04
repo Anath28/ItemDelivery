@@ -20,7 +20,7 @@ public class ItemServiceImp implements ItemService {
     }
 
     @Override
-    public Item getItem(long id) {
+    public Item getItemById(long id) {
         return itemRepository.findById(id).get();
     }
 
