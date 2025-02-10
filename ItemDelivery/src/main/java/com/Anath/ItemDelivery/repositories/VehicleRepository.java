@@ -1,6 +1,6 @@
 package com.Anath.ItemDelivery.repositories;
 
-import com.Anath.ItemDelivery.Vehicle;
+import com.Anath.ItemDelivery.entities.Vehicle;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

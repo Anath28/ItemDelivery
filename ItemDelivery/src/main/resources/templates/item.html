@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/styles/items.css}">
+    <link rel="stylesheet" th:href="@{/styles/global.css}">
+    <title>Create Item</title>
+</head>
+
+<body>
+ 
+    <nav th:replace="fragments/nav :: nav"></nav>
+
+    <section class="item-section">
+        <div class="item-form">
+            <h2>Create Item</h2>
+            <form method="post" enctype="multipart/form-data" th:action="@{/post-item}" th:object="${item}">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" th:field="*{name}" placeholder="Item Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="weight">Weight</label>
+                    <input type="text" id="weight" th:field="*{weight}" placeholder="Item Weight" required>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <div class="item-list">
+            <h2>All Items</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Weight</th>
+                        <th>Code</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${allItems}">
+                        <td th:text="${item.name}">Item Name</td>
+                        <td th:text="${item.weight}">Item Weight</td>
+                        <td th:text="${item.code}">Item Code</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+
+</body>
+
+</html>

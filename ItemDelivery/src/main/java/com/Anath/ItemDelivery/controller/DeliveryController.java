@@ -1,13 +1,17 @@
 package com.Anath.ItemDelivery.controller;
 
+import com.Anath.ItemDelivery.entities.Item;
 import org.springframework.ui.Model;
-import com.Anath.ItemDelivery.Vehicle;
+import com.Anath.ItemDelivery.entities.Vehicle;
 import com.Anath.ItemDelivery.services.ItemService;
 import com.Anath.ItemDelivery.services.VehicleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class DeliveryController {
@@ -42,4 +46,55 @@ public class DeliveryController {
         model.addAttribute("message", message);
         return "feature";
     }
+    @GetMapping("/create-item")
+    public String createItem(Model model){
+        Item item = new Item();
+        model.addAttribute("item", item)
+                .addAttribute("allItems", itemService.getAllItems());
+        return "item";
+    }
+
+    @PostMapping("/post-item")
+    public String postItem(Model model, @ModelAttribute("item") Item item){
+        String message = "Item created successfully";
+        itemService.createItem(item);
+        model.addAttribute("message", message);
+        return "item";
+    }
+     @PostMapping("/add-item-to-vehicle")
+    public String postItem(Model model, @RequestParam Long itemId, @RequestParam String plateNumber) {
+        Vehicle vehicle = vehicleService.getVehicleByPlateNumber(plateNumber);
+        Item item = itemService.getItemById(itemId);
+
+        if (vehicle == null) {
+            model.addAttribute("message", "Vehicle not found");
+            model.addAttribute("allVehicles", vehicleService.getAllVehicles());
+            model.addAttribute("allItems", itemService.getAllItems());
+            return "feature";
+        }
+
+        if (item == null) {
+            model.addAttribute("message", "Item not found");
+            model.addAttribute("allVehicles", vehicleService.getAllVehicles());
+            model.addAttribute("allItems", itemService.getAllItems());
+            return "feature";
+        }
+
+        List<Item> items = vehicle.getItems();
+        float weightOnVehicle = items.stream().map(Item::getWeight).reduce(0f, Float::sum);
+
+        if ((weightOnVehicle + item.getWeight()) <= vehicle.getCarryingWeight()) {
+            vehicle.getItems().add(item);
+            vehicleService.createVehicle(vehicle);
+            model.addAttribute("message", "Item added to vehicle successfully");
+        } else {
+            model.addAttribute("message", "Too much weight for this vehicle");
+        }
+
+        model.addAttribute("allVehicles", vehicleService.getAllVehicles());
+        model.addAttribute("allItems", itemService.getAllItems());
+
+        return "feature";
+    }
+
 }

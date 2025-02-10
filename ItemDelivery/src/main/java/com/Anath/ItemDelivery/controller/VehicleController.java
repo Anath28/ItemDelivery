@@ -1,7 +1,7 @@
 package com.Anath.ItemDelivery.controller;
 
-import com.Anath.ItemDelivery.Item;
-import com.Anath.ItemDelivery.Vehicle;
+import com.Anath.ItemDelivery.entities.Item;
+import com.Anath.ItemDelivery.entities.Vehicle;
 import com.Anath.ItemDelivery.services.ItemService;
 import com.Anath.ItemDelivery.services.VehicleService;
 import org.springframework.http.ResponseEntity;

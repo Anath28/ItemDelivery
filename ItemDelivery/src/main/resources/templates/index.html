@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/styles/index.css}">
+    <link rel="stylesheet" th:href="@{/styles/global.css}">
+    <title>Ship Smart</title>
+</head>
+
+<body>
+    <nav th:replace="~{fragments/nav :: nav}"></nav>
+
+    <section class="hero-section">
+        <div class="hero-content">   
+            <h1>Deliver Smarter, Faster, and Easier!</h1>
+            <p>Finding the right vehicle for your shipments has never been easier. With ShipSmart,
+                <br>
+                you get access to a fleet of reliable delivery options tailored to your cargo size, distance, and urgency.
+            </p>
+        </div>
+    </section>
+
+    <section class="services-section">
+        <h2>Our Services</h2>
+        <div class="services-cards">
+            <div class="card">
+                <h3>Faster</h3>
+                <p>Get your deliveries done in record time with our optimized routes and efficient service.</p>
+            </div>
+            <div class="card">
+                <h3>Smarter</h3>
+                <p>Utilize our smart technology to track and manage your shipments with ease.</p>
+            </div>
+            <div class="card">
+                <h3>Easier</h3>
+                <p>Experience hassle-free delivery with our user-friendly platform and dedicated support.</p>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

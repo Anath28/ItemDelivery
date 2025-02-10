@@ -1,6 +1,6 @@
 package com.Anath.ItemDelivery.services;
 
-import com.Anath.ItemDelivery.Item;
+import com.Anath.ItemDelivery.entities.Item;
 import com.Anath.ItemDelivery.repositories.ItemRepository;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.Anath.ItemDelivery.controller;
 
-import com.Anath.ItemDelivery.Item;
+import com.Anath.ItemDelivery.entities.Item;
 import com.Anath.ItemDelivery.services.ItemService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

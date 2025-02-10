@@ -1,8 +1,7 @@
 package com.Anath.ItemDelivery.services;
 
-import com.Anath.ItemDelivery.Vehicle;
+import com.Anath.ItemDelivery.entities.Vehicle;
 import com.Anath.ItemDelivery.repositories.VehicleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

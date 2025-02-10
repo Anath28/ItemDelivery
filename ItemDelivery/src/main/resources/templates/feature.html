@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Management</title>
+    <link rel="stylesheet" th:href="@{/styles/feature.css}">
+    <link rel="stylesheet" th:href="@{/styles/global.css}">
+</head>
+
+<body>
+    <nav th:replace="~{fragments/nav :: nav}"></nav>
+
+    <section class="vehicle-section">
+        <div class="vehicle-form">
+            <h2>Create Vehicle</h2>
+            <form method="post" enctype="multipart/form-data" th:action="@{/post-vehicle}" th:object="${vehicle}">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" th:field="*{name}" placeholder="Vehicle Name">
+                </div>
+                <div class="form-group">
+                    <label for="plateNumber">Plate Number</label>
+                    <input type="text" id="plateNumber" th:field="*{plateNumber}" placeholder="Plate Number">
+                </div>
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <input type="text" id="status" th:field="*{status}" placeholder="Status">
+                </div>
+                <div class="form-group">
+                    <label for="type">Type</label>
+                    <input type="text" id="type" th:field="*{type}" placeholder="Vehicle Type">
+                </div>
+                <div class="form-group">
+                    <label for="fuelCapacity">Fuel Capacity</label>
+                    <input type="text" id="fuelCapacity" th:field="*{fuelCapacity}" placeholder="Fuel Capacity">
+                </div>
+                <div class="form-group">
+                    <label for="carryingWeight">Carrying Weight</label>
+                    <input type="text" id="carryingWeight" th:field="*{carryingWeight}" placeholder="Carrying Weight">
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <div class="vehicle-list">
+            <h2>All Vehicles</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Name</th>
+                        <th>Plate Number</th>
+                        <th>Status</th>
+                        <th>Items</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="vehicle : ${allVehicles}">
+                        <td th:text="${vehicle.type}"></td>
+                        <td th:text="${vehicle.name}"></td>
+                        <td th:text="${vehicle.plateNumber}"></td>
+                        <td th:text="${vehicle.status}"></td>
+                        <td>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th>Item Weight</th>
+                                        <th>Item Code</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="item : ${vehicle.items}">
+                                        <td th:text="${item.name}"></td>
+                                        <td th:text="${item.weight}"></td>
+                                        <td th:text="${item.code}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="add-item-form">
+                <h3>Add Item to Vehicle</h3>
+                <form method="post" th:action="@{/add-item-to-vehicle}" th:object="${item}">
+                    <label for="vehiclePlate">Select Vehicle</label>
+                    <select id="vehiclePlate" name="plateNumber">
+                        <option th:each="vehicle : ${allVehicles}" th:value="${vehicle.plateNumber}" th:text="${vehicle.name}"></option>
+                    </select>
+                    <label for="itemId">Select Item</label>
+                    <select id="itemId" name="itemId">
+                        <option th:each="item : ${allItems}" th:value="${item.id}" th:text="${item.name} + ' (' + ${item.code} + ')'"></option>
+                    </select>
+
+                    <button type="submit">Add Item</button>
+                </form>
+            </div>
+        </div>
+
+
+    </section>
+
+    <script src="@{/js/main.js}"></script>
+</body>
+</html>
