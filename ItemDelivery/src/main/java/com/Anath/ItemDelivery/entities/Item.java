@@ -1,19 +1,15 @@
 package com.Anath.ItemDelivery.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.UUID;
 
 @Setter
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-
-
 public class Item {
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -22,43 +18,43 @@ public class Item {
     @Column(unique = true)
     private String code;
 
-    public Long getId(){
+    public Item() {
+        this.code = generateUniqueCode();
+    }
+
+    public Long getId() {
         return id;
     }
-    public void setId(Long id){
+
+    public void setId(Long id) {
         this.id = id;
     }
-    public String getName(){
+
+    public String getName() {
         return name;
     }
-    public void setName(String name){
+
+    public void setName(String name) {
         this.name = name;
     }
-    public float getWeight(){
+
+    public float getWeight() {
         return weight;
     }
-    public void setWeight(float weight){
+
+    public void setWeight(float weight) {
         this.weight = weight;
     }
-    public String getCode(){
+
+    public String getCode() {
         return code;
     }
-    public void setCode(String code){
+
+    public void setCode(String code) {
         this.code = code;
     }
+
     private String generateUniqueCode() {
         return UUID.randomUUID().toString();
-    }
-
-
-
-     @Override
-    public String toString() {
-        return "Item{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", weight=" + weight +
-                ", code='" + code + '\'' +
-                '}';
     }
 }

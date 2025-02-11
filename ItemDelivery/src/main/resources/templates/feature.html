@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
@@ -11,6 +12,9 @@
 
 <body>
     <nav th:replace="~{fragments/nav :: nav}"></nav>
+
+    <!-- Message Alert -->
+    <div id="flashMessage" th:if="${message}" th:text="${message}" class="flash-message"></div>
 
     <section class="vehicle-section">
         <div class="vehicle-form">
@@ -54,6 +58,7 @@
                         <th>Plate Number</th>
                         <th>Status</th>
                         <th>Items</th>
+                        <th>Remaining Weight</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,6 +67,7 @@
                         <td th:text="${vehicle.name}"></td>
                         <td th:text="${vehicle.plateNumber}"></td>
                         <td th:text="${vehicle.status}"></td>
+                       
                         <td>
                             <table>
                                 <thead>
@@ -80,6 +86,7 @@
                                 </tbody>
                             </table>
                         </td>
+                        <td th:text="${vehicle.totalWeight}"></td>
                     </tr>
                 </tbody>
             </table>
@@ -100,10 +107,9 @@
                 </form>
             </div>
         </div>
-
-
     </section>
 
     <script src="@{/js/main.js}"></script>
+
 </body>
 </html>
